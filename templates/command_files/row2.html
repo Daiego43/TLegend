@@ -1,0 +1,49 @@
+<div class="row" style="height: 450px;">
+    <div class="col-xl-4">
+        {% for command in command_files %}
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                {% if command == selected %}
+                <a class="btn btn-primary active" role="button" href="{{ url_for("load_files", selected=command) }}" style="font-size: 20px;margin-bottom: 10px;">
+                    {{ command }}
+                </a>
+                {% else %}
+                    <a class="btn btn-primary" role="button" href="{{ url_for("load_files", selected=command) }}" style="font-size: 20px;margin-bottom: 10px;">
+                    {{ command }}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <a class="btn btn-success" role="button" href="{{ url_for('command_editor', num=1) }}">New</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col" style="height: 100%;">
+        <div class="table-responsive" style="height: 100%;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>wait</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cmd, wait in command_files[selected] %}
+                    <tr>
+                        <td>{{ cmd }}</td>
+                        {% if wait == 1 %}
+                            <td>True</td>
+                        {% else %}
+                            <td>False</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

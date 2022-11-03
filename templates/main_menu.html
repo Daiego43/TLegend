@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <a class="btn btn-info" role="button" href="{{ url_for('load_files', selected="0") }}" style="height: 60px;width: 60%;font-size: 20px;border-radius: 15px;margin-bottom: 10px;text-align: center;margin-top: 0px;padding-top: 12px;padding-bottom: 12px;">Manage your command files</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <a class="btn btn-secondary" role="button" style="height: 60px;font-size: 20px;border-radius: 15px;margin-bottom: 10px;padding-top: 12px;padding-bottom: 12px;">Configurations</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col" style="text-align: center;">
+        <form action="{{ url_for("manage_option") }}" method="post">
+            <input type="hidden" name="command_file_name" value="{{ selected }}">
+            <div class="btn-group" role="group" style="padding: 10px;">
+                <button class="btn btn-danger"  name="submit" value="delete" type="submit">Delete selected</button>
+                <button class="btn btn-info"    name="submit" value="edit" type="submit">Edit selected</button>
+                <button class="btn btn-success" name="submit" value="run" type="submit">Run selected</button>
+            </div>
+        </form>
+    </div>
+</div>

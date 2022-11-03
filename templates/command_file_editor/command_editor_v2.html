@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% block content%}
+    <div class="row">
+            <div class="col"><label style="font-size: 25px;">File name :&nbsp;&nbsp;</label><input type="text" placeholder="insert filename" style="border-radius: 8px;"></div>
+        </div>
+        <div class="row">
+            <div class="col-xl-1" style="padding-top: 30px;padding-bottom: 0px;padding-right: 0px;padding-left: 40px;">
+
+                <button class="btn btn-danger" type="button" style="font-size: 20px"><b>x</b></button>
+
+            </div>
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Command 1</th>
+                                <th>&nbsp;Wait</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" style="width: 100%;border-radius: 5px;" placeholder="write here your command" name="command1"></td>
+                                <td style="width: 150px;">
+                                    <div class="btn-group" role="group"></div><select style="height: 28px;width: 120px;border-radius: 5px;" name="command1_wait">
+                                        <option value="0" selected="">False</option>
+                                        <option value="1">True</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                    <button class="btn btn-success" type="button" style="margin: 10px;font-size: 20px;"><b>+</b></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;"><button class="btn btn-info" type="button" style="margin: 20px;">Save&nbsp; file</button><button class="btn btn-info" type="button" style="margin: 20px;">Test</button></div>
+        </div>
+{% endblock %}
