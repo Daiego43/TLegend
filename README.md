@@ -1,4 +1,4 @@
-# terminator_launch
+# TLegend
 A scripting framework used to launch multi-pane terminator sessions with separate apps/processes running
 
 ## User guide
