@@ -36,12 +36,8 @@ def load_files(selected):
 
 @tlegend.route('/command_files/option', methods=['GET', 'POST'])
 def manage_option():
-    command_files = {}
-    print(request.form)
     selected = request.form['command_file_name']
     option = request.form["submit"]
-    for file in os.listdir(command_files_folder):
-        command_files[file] = read_commands(os.path.join(command_files_folder, file))
 
     print(option)
     if option == "delete":
