@@ -41,8 +41,8 @@ def manage_option():
 
     print(option)
     if option == "delete":
-        # TODO: Borrar el archivo que se selecciono
-        return load_files(selected)
+        os.remove(os.path.join(command_files_folder, selected))
+        return load_files(0)
     if option == "edit":
         # TODO: Abrir el editor de comandos para un archivo
         return load_files(selected)
@@ -85,8 +85,6 @@ def process_form():
 if __name__ == '__main__':
     def start_server():
         tlegend.run()
-
-
     t = threading.Thread(target=start_server)
     t.daemon = True
     t.start()
