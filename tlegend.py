@@ -63,7 +63,7 @@ def command_editor(num):
     add = num + 1 if num < 8 else 8
     dec = num - 1 if num > 1 else 1
 
-    return render_template("command_file_editor/command_editor_v2.html", numcommands=nums, add=add, dec=dec, num=num)
+    return render_template("command_file_editor/command_editor.html", numcommands=nums, add=add, dec=dec, num=num)
 
 
 @tlegend.route('/processing_commands', methods=['GET', 'POST'])

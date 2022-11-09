@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="row">
+            <div class="col"><label style="font-size: 25px;">File name :&nbsp;&nbsp;</label><input type="text" placeholder="insert filename" style="border-radius: 8px;"></div>
+        </div>
+        {% include 'command_file_editor/editor_form_row.html' %}
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <!--A este boton de aqui hay que añadirle la funcionalidad de brython-->
+                    <button class="btn btn-success" type="button" style="margin: 10px;font-size: 20px;"><b>+</b></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;"><button class="btn btn-info" type="button" style="margin: 20px;">Save&nbsp; file</button><button class="btn btn-info" type="button" style="margin: 20px;">Test</button></div>
+        </div>
+{% endblock %}
