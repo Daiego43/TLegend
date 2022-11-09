@@ -18,16 +18,9 @@ def home():  # put tlegendlication's code here
 ########################################################################################################################
 @tlegend.route('/command_files/<selected>', methods=['GET', 'POST'])
 def load_files(selected):
-    """
-    Enseña los archivos de comandos disponibles y su contenido.
-    Desde aqui se permite crear, editar, borrar y ejecutar archivos de comandos
-    :param selected:
-    :return:
-    """
     command_files = {}
     for file in os.listdir(command_files_folder):
         command_files[file] = read_commands(os.path.join(command_files_folder, file))
-
     sel = selected
     if selected == "0":
         sel = next(iter(command_files))
@@ -38,8 +31,6 @@ def load_files(selected):
 def manage_option():
     selected = request.form['command_file_name']
     option = request.form["submit"]
-
-    print(option)
     if option == "delete":
         os.remove(os.path.join(command_files_folder, selected))
         return load_files(0)
@@ -50,43 +41,75 @@ def manage_option():
         main_from_file(os.path.join(command_files_folder, selected))
         return load_files(selected)
 
+
 ########################################################################################################################
 # URLS RELATIVAS AL EDITOR DE COMANDOS                                                                                 #
 ########################################################################################################################
 
+def determine_num_cmds():
+    n = 1
+    r = request.form
+    if request.form.get("num_of_cmds") is not None:
+        n = int(request.form.get("num_of_cmds"))
 
-@tlegend.route('/command_editor/<num>', methods=['GET', 'POST'])
-def command_editor(num):
-    # define the number of commands
-    num = int(num)
-    nums = [i for i in range(1, num + 1)]
-    add = num + 1 if num < 8 else 8
-    dec = num - 1 if num > 1 else 1
+    if request.form.get("submit") == 'add':
+        if request.form.get("num_of_cmds") is not None:
+            n = int(request.form.get("num_of_cmds")) + 1
+            if n > 8:
+                n = 8
 
-    return render_template("command_file_editor/command_editor.html", numcommands=nums, add=add, dec=dec, num=num)
+    if request.form.get("submit") == "remove":
+        if request.form.get("num_of_cmds") is not None:
+            n = int(request.form.get("num_of_cmds")) - 1
+            if n < 1:
+                n = 1
+    return n
 
 
-@tlegend.route('/processing_commands', methods=['GET', 'POST'])
-def process_form():
-    try:
-        result = ''
-        maxcmds = int(request.form['numcmds']) + 1
-        commands = []
-        for i in range(1, maxcmds):
-            command = request.form[f'command_{i}']
-            command_opt = request.form[f'command_{i}_wait']
-            commands.append((command, int(command_opt)))
-        main_from_list(commands)
-    except Exception as e:
-        print(e)
-    return command_editor('1')
+def save_file():
+    pass
 
+
+def test_commands(commands):
+    main_from_list(commands)
+
+
+def get_commands(num_of_cmds):
+    terminator_input = []
+    for i in range(num_of_cmds):
+        cmd = ""
+        cmd_wait = 0
+        if request.form.get(f"command{i}") is not None:
+            cmd = request.form.get(f"command{i}")
+        if request.form.get(f"command{i}_wait") is not None:
+            cmd_wait = int(request.form.get(f"command{i}_wait"))
+        terminator_input.append((cmd, cmd_wait))
+    return terminator_input
+
+
+@tlegend.route('/command_editor', methods=['GET', 'POST'])
+def command_editor():
+    num_of_cmds = determine_num_cmds()
+    commands = get_commands(num_of_cmds)
+    if request.form.get("submit") == "test":
+        test_commands(commands)
+    if request.form.get("submit") == "save":
+        pass
+    return render_template("command_file_editor/command_editor.html", num_of_cmds=num_of_cmds, commands=commands)
+
+
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
 
 if __name__ == '__main__':
     def start_server():
         tlegend.run()
+    start_server()
+"""
     t = threading.Thread(target=start_server)
     t.daemon = True
     t.start()
     webview.create_window("Terminator Launcher", "http://127.0.0.1:5000/", width=1225, height=800, resizable=False)
     webview.start()
+"""

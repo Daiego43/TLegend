@@ -4,11 +4,11 @@
         <div class="row">
             <div class="col" style="text-align: center;">
                 {% if command == selected %}
-                <a class="btn btn-primary active" role="button" href="{{ url_for("load_files", selected=command) }}" style="font-size: 20px;margin-bottom: 10px;">
+                <a class="btn btn-primary active" role="button" href="{{ url_for('load_files', selected=command) }}" style="font-size: 20px;margin-bottom: 10px;">
                     {{ command }}
                 </a>
                 {% else %}
-                    <a class="btn btn-primary" role="button" href="{{ url_for("load_files", selected=command) }}" style="font-size: 20px;margin-bottom: 10px;">
+                    <a class="btn btn-primary" role="button" href="{{ url_for('load_files', selected=command) }}" style="font-size: 20px;margin-bottom: 10px;">
                     {{ command }}
                 </a>
                 {% endif %}
@@ -17,7 +17,7 @@
         {% endfor %}
         <div class="row">
             <div class="col" style="text-align: center;">
-                <a class="btn btn-success" role="button" href="{{ url_for('command_editor', num=1) }}">New</a>
+                <a class="btn btn-success" role="button" href="{{ url_for('command_editor') }}">New</a>
             </div>
         </div>
     </div>

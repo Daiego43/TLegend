@@ -1,23 +1,25 @@
 <div class="row">
-    <div class="col-xl-1" style="padding-top: 30px;padding-bottom: 0px;padding-right: 0px;padding-left: 40px;">
-        <button class="btn btn-danger" type="button" style="font-size: 20px"><b>x</b></button>
-    </div>
     <div class="col">
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Command 1</th>
+                        <th>Command {{ i }}</th>
                         <th>&nbsp;Wait</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" style="width: 100%;border-radius: 5px;" placeholder="write here your command" name="command1"></td>
+                        <td><input type="text" style="width: 100%;border-radius: 5px;" placeholder="write here your command" name="command{{i}}" value="{{commands[i][0]}}"></td>
                         <td style="width: 150px;">
-                            <div class="btn-group" role="group"></div><select style="height: 28px;width: 120px;border-radius: 5px;" name="command1_wait">
+                            <div class="btn-group" role="group"></div><select style="height: 28px;width: 120px;border-radius: 5px;" name="command{{i}}_wait">
+                            {% if commands[i][1] == 0 %}
                                 <option value="0" selected="">False</option>
                                 <option value="1">True</option>
+                            {% else %}
+                                <option value="0" selected="">False</option>
+                                <option value="1" selected="">True</option>
+                            {% endif %}
                             </select>
                         </td>
                     </tr>
