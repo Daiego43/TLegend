@@ -92,7 +92,7 @@ def put_commands(pos, cmd):
         if cmd[i][1]:
             ans = pg.confirm(title="Terminator Launcher", text="press OK to resume execution", buttons=['OK', 'Cancel'])
             if ans != "OK":
-                exit()
+                break
         pg.sleep(1)
 
 
