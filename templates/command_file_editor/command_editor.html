@@ -2,7 +2,11 @@
 {% block content %}
     <form action="{{ url_for('command_editor') }}" method="post">
     <div class="row">
-        <div class="col"><label style="font-size: 25px;">File name :&nbsp;&nbsp;</label><input type="text" placeholder="insert filename" style="border-radius: 8px;"></div>
+        <div class="col">
+            <label style="font-size: 25px;">File name :&nbsp;
+            <input type="text" placeholder="insert filename" name="filename" value="{{ filename }}" style="border-radius: 8px;">
+            </label>
+        </div>
     </div>
 
     {% for i in range(num_of_cmds) %}
