@@ -1,4 +1,7 @@
+import tkinter
+
 import pyautogui as pg
+from model.workaround_confirm import confirm
 import pyperclip
 import json
 from sys import exit
@@ -90,8 +93,8 @@ def put_commands(pos, cmd):
         text = cmd[i][0]
         workaround_write(text)
         if cmd[i][1]:
-            ans = pg.confirm(title="Terminator Launcher", text="press OK to resume execution", buttons=['OK', 'Cancel'])
-            if ans != "OK":
+            ans = confirm()
+            if not ans:
                 break
         pg.sleep(1)
 

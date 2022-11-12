@@ -36,7 +36,8 @@ def manage_option():
         return load_files(0)
     if option == "edit":
         commands = read_commands(os.path.join(command_files_folder, selected))
-        return render_template("command_file_editor/command_editor.html", num_of_cmds=len(commands), commands=commands, filename=selected)
+        return render_template("command_file_editor/command_editor.html", num_of_cmds=len(commands), commands=commands,
+                               filename=selected)
     if option == "run":
         main_from_file(os.path.join(command_files_folder, selected))
         return load_files(selected)
@@ -95,11 +96,14 @@ def command_editor():
     if request.form.get("submit") == "test":
         test_commands(commands)
     if request.form.get("submit") == "save":
+        if os.path.exists(os.path.join(command_files_folder, filename)):
+            os.remove(os.path.join(command_files_folder, filename))
         with open(os.path.join(command_files_folder, filename), "x") as f:
             for c in commands:
                 f.write(str(c[0]) + ";" + str(c[1]) + "\n")
         return load_files("0")
-    return render_template("command_file_editor/command_editor.html", num_of_cmds=num_of_cmds, commands=commands, filename=filename)
+    return render_template("command_file_editor/command_editor.html", num_of_cmds=num_of_cmds, commands=commands,
+                           filename=filename)
 
 
 ###################################################################################################################
@@ -109,8 +113,5 @@ def command_editor():
 if __name__ == '__main__':
     def start_server():
         tlegend.run()
-    t = threading.Thread(target=start_server)
-    t.daemon = True
-    t.start()
     webview.create_window("Terminator Launcher", "http://127.0.0.1:5000/", width=1225, height=800, resizable=False)
-    webview.start()
+    webview.start(func=start_server, gui="qt" )
