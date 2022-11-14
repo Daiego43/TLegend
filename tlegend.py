@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import os
 from model.terminator_launch import main_from_list, read_commands, main_from_file
 from flask import *
