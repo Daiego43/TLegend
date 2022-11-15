@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 import os
-from model.terminator_launch import main_from_list, read_commands, main_from_file
+from model.terminator_launch import read_commands, main_from_list, main_from_file
 from flask import *
 import webview
 import threading
 
 tlegend = Flask(__name__)
 command_files_folder = "command_files"
+config_file = os.path.join("static", "config.json")
 
 
 @tlegend.route('/', methods=['GET', 'POST'])
@@ -33,14 +34,15 @@ def manage_option():
     selected = request.form['command_file_name']
     option = request.form["submit"]
     if option == "delete":
-        os.remove(os.path.join(command_files_folder, selected))
-        return load_files(0)
+        if selected != "0":
+            os.remove(os.path.join(command_files_folder, selected))
+            return load_files(0)
     if option == "edit":
         commands = read_commands(os.path.join(command_files_folder, selected))
         return render_template("command_file_editor/command_editor.html", num_of_cmds=len(commands), commands=commands,
                                filename=selected)
     if option == "run":
-        main_from_file(os.path.join(command_files_folder, selected))
+        main_from_file(config_file,os.path.join(command_files_folder, selected))
         return load_files(selected)
 
 
@@ -73,7 +75,8 @@ def save_file():
 
 
 def test_commands(commands):
-    main_from_list(commands)
+    global config_file
+    main_from_list(config_file, commands)
 
 
 def get_commands(num_of_cmds):
@@ -115,4 +118,4 @@ if __name__ == '__main__':
     def start_server():
         tlegend.run()
     webview.create_window("Terminator Launcher", "http://127.0.0.1:5000/", width=1225, height=800, resizable=False)
-    webview.start(func=start_server, gui="qt" )
+    webview.start(func=start_server, gui="qt")
