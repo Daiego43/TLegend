@@ -45,6 +45,7 @@ def manage_option():
         main_from_file(config_file,os.path.join(command_files_folder, selected))
         return load_files(selected)
 
+    return load_files(selected)
 
 ########################################################################################################################
 # URLS RELATIVAS AL EDITOR DE COMANDOS                                                                                 #
